@@ -1,0 +1,23 @@
+.inner-container {
+  margin-top: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo {
+  width: 150px !important;
+  height: 150px !important;
+}
+
+.form-container {
+  margin-top: 1em;
+}
+
+.btn {
+  margin: 2em 0 !important;
+}
+
+.copyright {
+  margin-top: 4em !important;
+}
