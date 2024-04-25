@@ -8,6 +8,8 @@ import useInput from "../utils/hooks/useInput";
 import Input from "./Input";
 import SnackBar from "./SnackBar";
 import useSnackBar from "../utils/hooks/useSnackBar";
+import { login } from "../utils/Auth/Auth";
+import { useState } from "react";
 
 function validateText(text) {
   const isValid = !!String(text)?.trim();
@@ -15,6 +17,7 @@ function validateText(text) {
 }
 
 function LoginForm() {
+  const [isAuthenticating, setIsAuthenticating] = useState(false);
   const { open, showSnackBar, hideSnackBar, snackBarProps } = useSnackBar();
   const {
     value: userId,
@@ -45,7 +48,7 @@ function LoginForm() {
     passwordInvalidHandler();
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     if (!formIsValid) {
       showSnackBar({
@@ -61,6 +64,15 @@ function LoginForm() {
       userId: data.get("userId"),
       password: data.get("password"),
     });
+    setIsAuthenticating(true);
+    try {
+      const loginData = await login(data.get("userId"), data.get("password"));
+      // appCtx.authenticate(loginData);
+    } catch (error) {
+      console.log(error);
+      // onToggleSnackBar();
+      setIsAuthenticating(false);
+    }
   };
   return (
     <Box className={styles["inner-container"]}>
@@ -99,6 +111,7 @@ function LoginForm() {
           fullWidth
           variant="contained"
           className={styles.btn}
+          disabled={isAuthenticating}
         >
           Sign In
         </Button>
