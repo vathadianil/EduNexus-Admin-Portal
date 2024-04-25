@@ -10,6 +10,7 @@ import SnackBar from "./SnackBar";
 import useSnackBar from "../utils/hooks/useSnackBar";
 import { login } from "../utils/Auth/Auth";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function validateText(text) {
   const isValid = !!String(text)?.trim();
@@ -17,6 +18,7 @@ function validateText(text) {
 }
 
 function LoginForm() {
+  const navigate = useNavigate();
   const [isAuthenticating, setIsAuthenticating] = useState(false);
   const { open, showSnackBar, hideSnackBar, snackBarProps } = useSnackBar();
   const {
@@ -67,10 +69,18 @@ function LoginForm() {
     setIsAuthenticating(true);
     try {
       const loginData = await login(data.get("userId"), data.get("password"));
-      // appCtx.authenticate(loginData);
+      console.log(loginData);
+      if (loginData?.token) {
+        navigate("/home");
+        localStorage.setItem("loginData", JSON.stringify(loginData));
+      }
     } catch (error) {
       console.log(error);
-      // onToggleSnackBar();
+      showSnackBar({
+        type: "error",
+        message: "Unable to Login. Check your credential or Try again Later",
+      });
+
       setIsAuthenticating(false);
     }
   };

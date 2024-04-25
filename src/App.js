@@ -1,13 +1,9 @@
+import { RouterProvider } from "react-router-dom";
 import "./App.css";
-import Login from "./pages/Login";
-import AppContextProvider from "./store/app-context";
+import { routes } from "./routes/routes";
 
 function App() {
-  return (
-    <AppContextProvider>
-      <Login />
-    </AppContextProvider>
-  );
+  return <RouterProvider router={routes} />;
 }
 
 export default App;
