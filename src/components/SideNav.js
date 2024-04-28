@@ -1,12 +1,22 @@
-import { Card, styled } from "@mui/material";
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Card,
+  styled,
+} from "@mui/material";
 import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MuiDrawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
+import { Link } from "react-router-dom";
+import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlined";
+import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
 
 const drawerWidth = 240;
 const Drawer = styled(MuiDrawer, {
@@ -26,10 +36,21 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-const SideNavData = [
+const sideNavData = [
   {
+    hasSubmenu: false,
     displayText: "Dashboard",
     route: "/home",
+  },
+  {
+    hasSubmenu: true,
+    displayText: "User Management",
+    submenu: [
+      {
+        displayText: "Users",
+        route: "/home/users",
+      },
+    ],
   },
 ];
 
@@ -59,37 +80,112 @@ function SideNav({ open }) {
     <Drawer variant="permanent" open={open}>
       <Divider />
       <List sx={{ marginTop: 10 }}>
-        {SideNavData.map((item, index) => (
-          <ListItem
-            key={item.displayText}
-            disablePadding
-            sx={{ display: "block" }}
-          >
-            <Card>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                }}
+        {sideNavData.map((item, index) =>
+          item.hasSubmenu ? (
+            <Accordion>
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1-content"
+                id="panel1-header"
               >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
-                  }}
-                >
-                  {index === 0 && <HomeOutlinedIcon />}
-                </ListItemIcon>
-                <ListItemText
-                  primary={item.displayText}
-                  sx={{ opacity: open ? 1 : 0 }}
-                />
-              </ListItemButton>
-            </Card>
-          </ListItem>
-        ))}
+                {open && (
+                  <ListItem
+                    key={item.displayText}
+                    disablePadding
+                    sx={{ display: "block", marginRight: -2 }}
+                  >
+                    <ListItemButton
+                      sx={{
+                        minHeight: 48,
+                        justifyContent: open ? "initial" : "center",
+                        px: 2.5,
+                      }}
+                    >
+                      <ListItemIcon
+                        sx={{
+                          minWidth: 0,
+                          mr: open ? 3 : "auto",
+                          justifyContent: "center",
+                        }}
+                      >
+                        {index === 1 && <ManageAccountsOutlinedIcon />}
+                      </ListItemIcon>
+                      <ListItemText
+                        primary={item.displayText}
+                        sx={{ opacity: open ? 1 : 0 }}
+                      />
+                    </ListItemButton>
+                  </ListItem>
+                )}
+              </AccordionSummary>
+              <AccordionDetails>
+                {item.submenu.map((item, index) => (
+                  <Link to={item.route}>
+                    <ListItem
+                      key={item.displayText}
+                      disablePadding
+                      sx={{ display: "block" }}
+                    >
+                      <ListItemButton
+                        sx={{
+                          minHeight: 48,
+                          justifyContent: open ? "initial" : "center",
+                          px: 2.5,
+                        }}
+                      >
+                        <ListItemIcon
+                          sx={{
+                            minWidth: 0,
+                            mr: open ? 3 : "auto",
+                            justifyContent: "center",
+                          }}
+                        >
+                          {index === 0 && <PeopleAltOutlinedIcon />}
+                        </ListItemIcon>
+                        <ListItemText
+                          primary={item.displayText}
+                          sx={{ opacity: open ? 1 : 0 }}
+                        />
+                      </ListItemButton>
+                    </ListItem>
+                  </Link>
+                ))}
+              </AccordionDetails>
+            </Accordion>
+          ) : (
+            <Link to={item.route}>
+              <ListItem
+                key={item.displayText}
+                disablePadding
+                sx={{ display: "block", marginTop: 1, marginBottom: 1 }}
+              >
+                <Card>
+                  <ListItemButton
+                    sx={{
+                      minHeight: 48,
+                      justifyContent: open ? "initial" : "center",
+                      px: 2.5,
+                    }}
+                  >
+                    <ListItemIcon
+                      sx={{
+                        minWidth: 0,
+                        mr: open ? 3 : "auto",
+                        justifyContent: "center",
+                      }}
+                    >
+                      {index === 0 && <HomeOutlinedIcon />}
+                    </ListItemIcon>
+                    <ListItemText
+                      primary={item.displayText}
+                      sx={{ opacity: open ? 1 : 0 }}
+                    />
+                  </ListItemButton>
+                </Card>
+              </ListItem>
+            </Link>
+          )
+        )}
       </List>
     </Drawer>
   );
