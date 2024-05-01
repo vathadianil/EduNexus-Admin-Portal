@@ -2,15 +2,21 @@ import { Box, Card, Typography } from "@mui/material";
 import CustomBarChart from "./CustomBarChart";
 import styles from "../../../css/bar-chart/bar-chart-container.module.css";
 
-function BarChartContainer() {
+function BarChartContainer({ barChartData }) {
+  const { dataset, title, displayValue, subTitle, descriptionText, style } =
+    barChartData;
   return (
     <Card className={styles.container}>
       <Box className={styles["text-container"]}>
         <Typography variant="h6" className={styles.title}>
-          Revenue
+          {title}
         </Typography>
-        <Typography variant="h4" className={styles["data-text"]}>
-          10k
+        <Typography
+          variant="h4"
+          className={styles["data-text"]}
+          style={{ color: style?.color }}
+        >
+          {displayValue}
           <Typography
             variant="subtitle2"
             className={`${styles["data-text"]} ${styles["sub-data-text"]}`}
@@ -20,12 +26,19 @@ function BarChartContainer() {
         </Typography>
 
         <Typography variant="subtitle1" className={styles.title}>
-          All Villages
+          {subTitle}
         </Typography>
       </Box>
-      <Box className={styles["chart-container"]}>
+      <Box
+        className={styles["chart-container"]}
+        style={{ backgroundColor: style?.backgroundColor }}
+      >
         <Box className={styles.chart}>
-          <CustomBarChart />
+          <CustomBarChart
+            dataset={dataset}
+            descriptionText={descriptionText}
+            style={style}
+          />
         </Box>
       </Box>
     </Card>

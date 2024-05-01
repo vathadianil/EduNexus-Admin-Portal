@@ -1,6 +1,7 @@
 .container {
   display: flex;
   justify-content: center;
+  /* gap: 1em; */
   border-radius: 1em !important;
   overflow: hidden;
 }
@@ -11,14 +12,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 1em;
-}
-
-.chart-container {
   flex: 1;
-}
-.chart {
-  display: flex;
-  justify-content: center;
 }
 
 .title {
@@ -28,8 +22,4 @@
 
 .data-text {
   font-weight: bold !important;
-}
-
-.sub-data-text {
-  text-align: center;
 }

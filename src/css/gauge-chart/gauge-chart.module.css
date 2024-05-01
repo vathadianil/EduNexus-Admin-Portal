@@ -1,0 +1,18 @@
+.gauge-chart-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60px;
+  aspect-ratio: 1;
+  border-radius: 50% !important;
+  inset: 0;
+  margin: auto;
+  /* box-shadow:  !important; */
+}
+
+.gauge-chart-value {
+  font-weight: bold;
+}

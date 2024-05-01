@@ -7,52 +7,13 @@ const chartSetting = {
   height: 200,
 };
 
-const dataset = [
-  {
-    revenue: 20000,
-    day: "01/04/24",
-  },
-  {
-    revenue: 20000,
-    day: "02/04/24",
-  },
-  {
-    revenue: 30000,
-    day: "03/04/24",
-  },
-  {
-    revenue: 40000,
-    day: "04/04/24",
-  },
-  {
-    revenue: 50000,
-    day: "05/04/24",
-  },
-  {
-    revenue: 50000,
-    day: "06/04/24",
-  },
-  {
-    revenue: 40000,
-    day: "07/04/24",
-  },
-  {
-    revenue: 30000,
-    day: "08/04/24",
-  },
-  {
-    revenue: 50000,
-    day: "09/04/24",
-  },
-  {
-    revenue: 60000,
-    day: "10/04/24",
-  },
-];
-
 const valueFormatter = (value) => `Rs ${value}/-`;
 
-export default function CustomBarChart() {
+export default function CustomBarChart({
+  dataset = [],
+  descriptionText,
+  style,
+}) {
   return (
     <Box>
       <BarChart
@@ -68,7 +29,7 @@ export default function CustomBarChart() {
             tickLabelPlacement: "tick",
             colorMap: {
               type: "ordinal",
-              colors: ["green"],
+              colors: [style?.color],
             },
           },
         ]}
@@ -82,8 +43,12 @@ export default function CustomBarChart() {
         }}
         {...chartSetting}
       />
-      <Typography variant="h6" className={styles["chart-sub-title"]}>
-        Last 10 Days
+      <Typography
+        variant="h6"
+        className={styles["chart-sub-title"]}
+        style={{ color: style?.color }}
+      >
+        {descriptionText}
       </Typography>
     </Box>
   );
