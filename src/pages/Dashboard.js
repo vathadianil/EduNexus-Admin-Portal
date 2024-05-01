@@ -168,9 +168,9 @@ function Dashboard() {
     subTitle: "Total 5k",
     dataset: {
       remainingText: "Not Paid",
-      remaining: "3k",
+      remaining: "2k",
       valueText: "Paid",
-      value: "2k",
+      value: "3k",
       percentage: 65,
     },
     style: {
