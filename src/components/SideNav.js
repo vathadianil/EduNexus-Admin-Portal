@@ -2,6 +2,7 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
+  Box,
   Card,
   styled,
 } from "@mui/material";
@@ -17,6 +18,7 @@ import List from "@mui/material/List";
 import { Link } from "react-router-dom";
 import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlined";
 import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
+import styles from "../css/sidenav.module.css";
 
 const drawerWidth = 240;
 const Drawer = styled(MuiDrawer, {
@@ -79,52 +81,21 @@ function SideNav({ open }) {
   return (
     <Drawer variant="permanent" open={open}>
       <Divider />
-      <List sx={{ marginTop: 10 }}>
-        {sideNavData.map((item, index) =>
-          item.hasSubmenu ? (
-            <Accordion>
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1-content"
-                id="panel1-header"
-              >
-                {open && (
-                  <ListItem
-                    key={item.displayText}
-                    disablePadding
-                    sx={{ display: "block", marginRight: -2 }}
-                  >
-                    <ListItemButton
-                      sx={{
-                        minHeight: 48,
-                        justifyContent: open ? "initial" : "center",
-                        px: 2.5,
-                      }}
-                    >
-                      <ListItemIcon
-                        sx={{
-                          minWidth: 0,
-                          mr: open ? 3 : "auto",
-                          justifyContent: "center",
-                        }}
-                      >
-                        {index === 1 && <ManageAccountsOutlinedIcon />}
-                      </ListItemIcon>
-                      <ListItemText
-                        primary={item.displayText}
-                        sx={{ opacity: open ? 1 : 0 }}
-                      />
-                    </ListItemButton>
-                  </ListItem>
-                )}
-              </AccordionSummary>
-              <AccordionDetails>
-                {item.submenu.map((item, index) => (
-                  <Link to={item.route}>
+      <List className={styles["list-ontainer"]}>
+        {sideNavData.map((item, index) => (
+          <Box key={item.displayText}>
+            {item.hasSubmenu ? (
+              <Accordion>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel1-content"
+                  id="panel1-header"
+                >
+                  {open && (
                     <ListItem
                       key={item.displayText}
                       disablePadding
-                      sx={{ display: "block" }}
+                      sx={{ display: "block", marginRight: -2 }}
                     >
                       <ListItemButton
                         sx={{
@@ -140,7 +111,7 @@ function SideNav({ open }) {
                             justifyContent: "center",
                           }}
                         >
-                          {index === 0 && <PeopleAltOutlinedIcon />}
+                          {index === 1 && <ManageAccountsOutlinedIcon />}
                         </ListItemIcon>
                         <ListItemText
                           primary={item.displayText}
@@ -148,44 +119,77 @@ function SideNav({ open }) {
                         />
                       </ListItemButton>
                     </ListItem>
-                  </Link>
-                ))}
-              </AccordionDetails>
-            </Accordion>
-          ) : (
-            <Link to={item.route}>
-              <ListItem
-                key={item.displayText}
-                disablePadding
-                sx={{ display: "block", marginTop: 1, marginBottom: 1 }}
-              >
-                <Card>
-                  <ListItemButton
-                    sx={{
-                      minHeight: 48,
-                      justifyContent: open ? "initial" : "center",
-                      px: 2.5,
-                    }}
-                  >
-                    <ListItemIcon
+                  )}
+                </AccordionSummary>
+                <AccordionDetails>
+                  {item.submenu.map((item, index) => (
+                    <Link to={item.route} key={index}>
+                      <ListItem
+                        key={item.displayText}
+                        disablePadding
+                        sx={{ display: "block" }}
+                      >
+                        <ListItemButton
+                          sx={{
+                            minHeight: 48,
+                            justifyContent: open ? "initial" : "center",
+                            px: 2.5,
+                          }}
+                        >
+                          <ListItemIcon
+                            sx={{
+                              minWidth: 0,
+                              mr: open ? 3 : "auto",
+                              justifyContent: "center",
+                            }}
+                          >
+                            {index === 0 && <PeopleAltOutlinedIcon />}
+                          </ListItemIcon>
+                          <ListItemText
+                            primary={item.displayText}
+                            sx={{ opacity: open ? 1 : 0 }}
+                          />
+                        </ListItemButton>
+                      </ListItem>
+                    </Link>
+                  ))}
+                </AccordionDetails>
+              </Accordion>
+            ) : (
+              <Link to={item.route}>
+                <ListItem
+                  key={item.displayText}
+                  disablePadding
+                  sx={{ display: "block", marginTop: 1, marginBottom: 1 }}
+                >
+                  <Card>
+                    <ListItemButton
                       sx={{
-                        minWidth: 0,
-                        mr: open ? 3 : "auto",
-                        justifyContent: "center",
+                        minHeight: 48,
+                        justifyContent: open ? "initial" : "center",
+                        px: 2.5,
                       }}
                     >
-                      {index === 0 && <HomeOutlinedIcon />}
-                    </ListItemIcon>
-                    <ListItemText
-                      primary={item.displayText}
-                      sx={{ opacity: open ? 1 : 0 }}
-                    />
-                  </ListItemButton>
-                </Card>
-              </ListItem>
-            </Link>
-          )
-        )}
+                      <ListItemIcon
+                        sx={{
+                          minWidth: 0,
+                          mr: open ? 3 : "auto",
+                          justifyContent: "center",
+                        }}
+                      >
+                        {index === 0 && <HomeOutlinedIcon />}
+                      </ListItemIcon>
+                      <ListItemText
+                        primary={item.displayText}
+                        sx={{ opacity: open ? 1 : 0 }}
+                      />
+                    </ListItemButton>
+                  </Card>
+                </ListItem>
+              </Link>
+            )}
+          </Box>
+        ))}
       </List>
     </Drawer>
   );

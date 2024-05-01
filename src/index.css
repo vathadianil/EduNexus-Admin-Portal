@@ -16,3 +16,30 @@ a {
   text-decoration: none;
   color: black;
 }
+
+:root {
+  --blue800: #3361ff;
+  --blue50: #f0f3ff;
+
+  --purple800: #8833ff;
+  --purple50: #ddc7fc;
+
+  --twitter-blue500: #33bfff;
+  --twitter-blue400: #6ad2ff;
+
+  --green800: #128822;
+  --green500: #29cc39;
+  --green50: #f4fcf5;
+
+  --orange800: #ff6633;
+  --orange50: #fff7f5;
+
+  --yellow500: #feca33;
+
+  --background-color: #f7f8fa;
+
+  --text-color1: #bec7d6;
+
+  --white: #fff;
+  --black: #000;
+}
