@@ -11,19 +11,22 @@ function BarChartContainer({ barChartData }) {
         <Typography variant="h6" className={styles.title}>
           {title}
         </Typography>
-        <Typography
-          variant="h4"
-          className={styles["data-text"]}
-          style={{ color: style?.color }}
-        >
-          {displayValue}
+        <Box>
+          <Typography
+            variant="h4"
+            className={styles["data-text"]}
+            style={{ color: style?.color }}
+          >
+            {displayValue}
+          </Typography>
           <Typography
             variant="subtitle2"
+            style={{ color: style?.color }}
             className={`${styles["data-text"]} ${styles["sub-data-text"]}`}
           >
             (Today)
           </Typography>
-        </Typography>
+        </Box>
 
         <Typography variant="subtitle1" className={styles.title}>
           {subTitle}

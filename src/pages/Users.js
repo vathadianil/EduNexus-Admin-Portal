@@ -1,16 +1,5 @@
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-
-// function createData(name, calories, fat, carbs, protein) {
-//   return { name, calories, fat, carbs, protein };
-// }
-
-// const rows = [
-//   createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-//   createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-//   createData("Eclair", 262, 16.0, 24, 6.0),
-//   createData("Cupcake", 305, 3.7, 67, 4.3),
-//   createData("Gingerbread", 356, 16.0, 49, 3.9),
-// ];
+import CustomBreadCrumbs from "../components/CustomBreadCrumbs";
+import CustomTable from "../components/CustomTable";
 
 const columns = [
   { field: "id", headerName: "ID", width: 70 },
@@ -42,33 +31,19 @@ const rows = [
   { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
   { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
   { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
-  { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
-  { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
-  { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
-  { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
-  { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
-  { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
+  { id: 10, lastName: "Stark", firstName: "Arya", age: 16 },
+  { id: 11, lastName: "Targaryen", firstName: "Daenerys", age: null },
+  { id: 12, lastName: "Melisandre", firstName: null, age: 150 },
+  { id: 13, lastName: "Clifford", firstName: "Ferrara", age: 44 },
+  { id: 14, lastName: "Frances", firstName: "Rossini", age: 36 },
+  { id: 15, lastName: "Roxie", firstName: "Harvey", age: 65 },
 ];
+
 export default function Users() {
   return (
-    <div style={{ maxHeight: 400 }}>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        initialState={{
-          pagination: {
-            paginationModel: { page: 0, pageSize: 5 },
-          },
-        }}
-        pageSizeOptions={[5, 10]}
-        disableRowSelectionOnClick
-        slots={{ toolbar: GridToolbar }}
-        slotProps={{
-          toolbar: {
-            showQuickFilter: true,
-          },
-        }}
-      />
-    </div>
+    <>
+      <CustomBreadCrumbs />
+      <CustomTable rows={rows} columns={columns} />
+    </>
   );
 }
