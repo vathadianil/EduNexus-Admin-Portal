@@ -5,7 +5,7 @@ import { GridCsvExportOptions } from "@mui/x-data-grid";
 
 function CustomTable({ rows, columns }) {
   return (
-    <Card className={styles.container}>
+    <Card elevation={6} className={styles.container}>
       <DataGrid
         disableColumnSelector={true}
         disableColumnMenu={true}
