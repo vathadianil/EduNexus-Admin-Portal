@@ -20,7 +20,7 @@ import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlin
 import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
 import styles from "../css/sidenav.module.css";
 
-const drawerWidth = 240;
+const drawerWidth = 260;
 const Drawer = styled(MuiDrawer, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
@@ -95,7 +95,7 @@ function SideNav({ open }) {
                     <ListItem
                       key={item.displayText}
                       disablePadding
-                      sx={{ display: "block", marginRight: -2 }}
+                      sx={{ display: "block" }}
                     >
                       <ListItemButton
                         sx={{

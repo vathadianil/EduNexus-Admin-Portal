@@ -1,6 +1,7 @@
 import { Card } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import styles from "../css/table.module.css";
+import { GridCsvExportOptions } from "@mui/x-data-grid";
 
 function CustomTable({ rows, columns }) {
   return (
@@ -9,7 +10,6 @@ function CustomTable({ rows, columns }) {
         disableColumnSelector={true}
         disableColumnMenu={true}
         disableDensitySelector={true}
-        isCellEditable={(value) => console.log(value)}
         rows={rows}
         columns={columns}
         initialState={{
@@ -25,7 +25,7 @@ function CustomTable({ rows, columns }) {
             showQuickFilter: true,
           },
         }}
-      />
+      ></DataGrid>
     </Card>
   );
 }

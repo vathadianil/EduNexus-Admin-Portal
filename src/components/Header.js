@@ -4,7 +4,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Logo from "../assets/images/icon.png";
 import styles from "../css/header.module.css";
 
-const drawerWidth = 240;
+const drawerWidth = 260;
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
