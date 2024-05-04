@@ -3,6 +3,7 @@ import React from "react";
 import styles from "../css/dashboard.module.css";
 import BarChartContainer from "../components/Charts/BarChart/BarChartContainer";
 import GaugeChartContainer from "../components/Charts/GaugeChart/GaugeChartContainer";
+import MerchantWiseRevenue from "../components/Charts/MerchantWiseRevenue/MerchantWiseRevenue";
 
 function Dashboard() {
   const revenueBarChartData = {
@@ -179,12 +180,45 @@ function Dashboard() {
       colorGray800: "#9d9e9d",
     },
   };
+  const merchantWiseRevenueData = {
+    title: "Merchant Wise Revenue",
+    data: [
+      {
+        name: "Paytm",
+        value: 10000,
+        displayValue: "10k",
+        style: {
+          backgroundColor: "#f0f3ff",
+          color: "#00baf2",
+        },
+      },
+      {
+        name: "PhonePe",
+        value: 15000,
+        displayValue: "15k",
+        style: {
+          backgroundColor: "#ddc7fc",
+          color: "#8833ff",
+        },
+      },
+      {
+        name: "Google Pay",
+        value: 5000,
+        displayValue: "5k",
+        style: {
+          backgroundColor: "#fff",
+          color: "#3361ff",
+        },
+      },
+    ],
+  };
   return (
     <Box className={styles.container}>
       <BarChartContainer barChartData={revenueBarChartData} />
       <BarChartContainer barChartData={visitedStudentsBarChartData} />
       <BarChartContainer barChartData={interestedStudentsBarChartData} />
       <GaugeChartContainer guageChartData={feepaidPercentageGaugeChartData} />
+      <MerchantWiseRevenue revenueData={merchantWiseRevenueData} />
     </Box>
   );
 }

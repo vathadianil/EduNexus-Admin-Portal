@@ -1,0 +1,45 @@
+.container {
+  border-radius: 1em !important;
+  overflow: hidden;
+}
+
+.inner-container {
+  max-height: 220px;
+  overflow: auto;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1em 0;
+  padding: 0.5em 1em;
+  border-radius: 1em;
+}
+.wrapper:nth-child(even) {
+  background-color: var(--background-color);
+}
+
+.text-container {
+  padding: 1em;
+}
+
+.title-container {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
+.title {
+  color: var(--text-color1);
+}
+
+.image {
+  width: 35px;
+  aspect-ratio: 1;
+}
+
+.amount-container {
+  padding: 0.1em 1em;
+  border-radius: 0.3em;
+}

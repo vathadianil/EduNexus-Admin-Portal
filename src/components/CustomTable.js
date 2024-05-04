@@ -1,7 +1,6 @@
 import { Card } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import styles from "../css/table.module.css";
-import { GridCsvExportOptions } from "@mui/x-data-grid";
 
 function CustomTable({ rows, columns }) {
   return (
