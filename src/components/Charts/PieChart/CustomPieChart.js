@@ -16,7 +16,7 @@ function CustomPieChart({ dataset, style, total }) {
           },
         ]}
         margin={{ left: 0, right: 0 }}
-        width={300}
+        width={200}
         height={300}
         slotProps={{
           legend: {

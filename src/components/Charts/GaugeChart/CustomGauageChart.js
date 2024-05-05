@@ -20,7 +20,7 @@ function CustomGauageChart({ dataset, style }) {
             fill: style.colorGreen800,
           },
           [`& .${gaugeClasses.referenceArc}`]: {
-            fill: theme.palette.text.disabled,
+            fill: style.colorGreen50,
           },
         })}
       />
