@@ -1,31 +1,37 @@
-import { Card } from "@mui/material";
+import { Box, Card } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import styles from "../css/table.module.css";
 
-function CustomTable({ rows, columns }) {
+function CustomTable({ rows, columns, setRowId, loading }) {
   return (
-    <Card elevation={6} className={styles.container}>
-      <DataGrid
-        disableColumnSelector={true}
-        disableColumnMenu={true}
-        disableDensitySelector={true}
-        rows={rows}
-        columns={columns}
-        initialState={{
-          pagination: {
-            paginationModel: { page: 0, pageSize: 5 },
-          },
-        }}
-        pageSizeOptions={[5, 10]}
-        disableRowSelectionOnClick
-        slots={{ toolbar: GridToolbar }}
-        slotProps={{
-          toolbar: {
-            showQuickFilter: true,
-          },
-        }}
-      ></DataGrid>
-    </Card>
+    <Box className={styles.container}>
+      <Card elevation={6} className={styles["inner-container"]}>
+        <DataGrid
+          disableColumnSelector={true}
+          disableColumnMenu={true}
+          disableDensitySelector={true}
+          disableColumnFilter={true}
+          rows={rows}
+          columns={columns}
+          getRowId={(row) => row.aID}
+          initialState={{
+            pagination: {
+              paginationModel: { page: 0, pageSize: 5 },
+            },
+          }}
+          loading={loading}
+          pageSizeOptions={[5, 10]}
+          disableRowSelectionOnClick
+          slots={{ toolbar: GridToolbar }}
+          slotProps={{
+            toolbar: {
+              showQuickFilter: true,
+            },
+          }}
+          onCellEditStop={(params) => setRowId(params.id)}
+        ></DataGrid>
+      </Card>
+    </Box>
   );
 }
 
