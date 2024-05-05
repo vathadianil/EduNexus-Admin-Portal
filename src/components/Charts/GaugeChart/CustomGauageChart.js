@@ -4,7 +4,7 @@ import styles from "../../../css/gauge-chart/gauge-chart.module.css";
 
 function CustomGauageChart({ dataset, style }) {
   return (
-    <div style={{ position: "relative" }}>
+    <div className={styles["guage-chart-container"]}>
       <Gauge
         width={200}
         height={300}
@@ -38,7 +38,7 @@ function CustomGauageChart({ dataset, style }) {
             color: style.colorGreen800,
           }}
         >
-          65%
+          {dataset?.percentage}%
         </Typography>
       </Card>
     </div>

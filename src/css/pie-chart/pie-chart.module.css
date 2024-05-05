@@ -1,7 +1,7 @@
-.guage-chart-container {
+.pie-chart-container {
   position: relative;
 }
-.gauge-chart-card {
+.pie-chart-card {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,9 +13,8 @@
   border-radius: 50% !important;
   inset: 0;
   margin: auto;
-  /* box-shadow:  !important; */
 }
 
-.gauge-chart-value {
+.pie-chart-value {
   font-weight: bold;
 }

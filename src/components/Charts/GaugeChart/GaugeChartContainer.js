@@ -26,14 +26,9 @@ function GaugeChartContainer({ guageChartData }) {
           {dataset?.remainingText}
         </Typography>
       </Box>
-      <Box
-        className={styles["chart-container"]}
-        style={{ backgroundColor: style?.backgroundColor }}
-      >
-        <Box className={styles.chart}>
-          <CustomGauageChart dataset={dataset} style={style} />
-        </Box>
-      </Box>
+
+      <CustomGauageChart dataset={dataset} style={style} />
+
       <Box className={styles["text-container"]}>
         <Typography variant="h6" className={styles.title}>
           {subTitle}

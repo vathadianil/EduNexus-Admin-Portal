@@ -4,6 +4,7 @@ import styles from "../css/dashboard.module.css";
 import BarChartContainer from "../components/Charts/BarChart/BarChartContainer";
 import GaugeChartContainer from "../components/Charts/GaugeChart/GaugeChartContainer";
 import MerchantWiseRevenue from "../components/Charts/MerchantWiseRevenue/MerchantWiseRevenue";
+import PieChartContainer from "../components/Charts/PieChart/PieChartContainer";
 
 function Dashboard() {
   const revenueBarChartData = {
@@ -212,6 +213,29 @@ function Dashboard() {
       },
     ],
   };
+
+  const cashNoncashPieChartData = {
+    title: "Revenue",
+    total: "10k",
+    style: {
+      colorGreen800: "#128822",
+      colorGreen50: "#f4fcf5",
+    },
+    data: [
+      {
+        label: "Cash",
+        value: 7000,
+        displayValue: "7k",
+        color: "#ff6633",
+      },
+      {
+        label: "Non Cash",
+        value: 3000,
+        displayValue: "3k",
+        color: "#3361ff",
+      },
+    ],
+  };
   return (
     <Box className={styles.container}>
       <BarChartContainer barChartData={revenueBarChartData} />
@@ -219,6 +243,7 @@ function Dashboard() {
       <BarChartContainer barChartData={interestedStudentsBarChartData} />
       <GaugeChartContainer guageChartData={feepaidPercentageGaugeChartData} />
       <MerchantWiseRevenue revenueData={merchantWiseRevenueData} />
+      <PieChartContainer pieChartData={cashNoncashPieChartData} />
     </Box>
   );
 }
