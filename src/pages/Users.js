@@ -4,6 +4,7 @@ import CustomTable from "../components/CustomTable";
 import UserActions from "../components/UserActions";
 import axios from "../utils/axios/axios";
 import { GET_USER } from "../utils/api/api-request";
+import DisplayQr from "../components/DisplayQr";
 
 export default function Users() {
   const [rowId, setRowId] = useState(null);
@@ -16,6 +17,12 @@ export default function Users() {
         field: "aID",
         headerName: "ID",
         width: 70,
+      },
+      {
+        field: "role",
+        headerName: "Role",
+        width: 70,
+        editable: true,
       },
       {
         field: "fname",
@@ -41,6 +48,12 @@ export default function Users() {
         headerName: "User Id",
         width: 90,
       },
+      {
+        field: "mobileno",
+        headerName: "Mobile No",
+        width: 120,
+        editable: true,
+      },
 
       {
         field: "isactive",
@@ -58,6 +71,11 @@ export default function Users() {
         field: "collegeName",
         headerName: "College Name",
         width: 190,
+      },
+      {
+        field: "paymentqr",
+        headerName: "Payment QR",
+        renderCell: (params) => <DisplayQr {...{ params }} />,
       },
       {
         field: "actions",
