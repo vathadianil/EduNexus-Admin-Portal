@@ -6,6 +6,7 @@ import useSnackBar from "../utils/hooks/useSnackBar";
 import useInput from "../utils/hooks/useInput";
 import styles from "../css/add-user-form.module.css";
 import DropDown from "./DropDown";
+import CustomSwitch from "./CustomSwitch";
 
 function validateText(text) {
   const isValid = !!String(text)?.trim();
@@ -79,14 +80,8 @@ function AddUserForm() {
     formStateChangeHandler: roleInvalidHandler,
   } = useInput("", validateText);
 
-  const {
-    value: isactive,
-    isValid: isactiveIsValid,
-    hasError: isactiveHasError,
-    valueChangeHandler: isactiveChangeHandler,
-    inputBlurHandler: isactiveBlurHandler,
-    formStateChangeHandler: isactiveInvalidHandler,
-  } = useInput("", validateText);
+  const { value: isactive, valueChangeHandler: isactiveChangeHandler } =
+    useInput(true, validateText);
 
   let formIsValid = false;
 
@@ -97,8 +92,7 @@ function AddUserForm() {
     passwordIsValid &&
     emailIsValid &&
     mobilenoIsValid &&
-    roleIsValid &&
-    isactiveIsValid
+    roleIsValid
   ) {
     formIsValid = true;
   }
@@ -111,7 +105,6 @@ function AddUserForm() {
     emailInvalidHandler();
     mobilenoInvalidHandler();
     roleInvalidHandler();
-    isactiveInvalidHandler();
   };
 
   const handleSubmit = async (event) => {
@@ -143,107 +136,108 @@ function AddUserForm() {
         type: "error",
         message: "Unable to Login. Check your credential or Try again Later",
       });
-
-      setIsAuthenticating(false);
     }
+    setIsAuthenticating(false);
   };
   return (
-    <Box
-      component="form"
-      onSubmit={handleSubmit}
-      noValidate
-      className={styles["form-container"]}
-    >
-      <Input
-        label={"First Name"}
-        name={"fname"}
-        id={"fname"}
-        value={fname}
-        onInputChangeHandler={fnameChangeHandler}
-        onBlurHandler={fnameBlurHandler}
-        hasError={fnameHasError}
-      />
-      <Input
-        label={"Last Name"}
-        name={"lname"}
-        id={"lname"}
-        value={lname}
-        onInputChangeHandler={lnameChangeHandler}
-        onBlurHandler={lnameBlurHandler}
-        hasError={lnameHasError}
-      />
-      <Input
-        label={"Email"}
-        name={"email"}
-        id={"email"}
-        type="email"
-        value={email}
-        onInputChangeHandler={emailChangeHandler}
-        onBlurHandler={emailBlurHandler}
-        hasError={emailHasError}
-      />
+    <Box component="form" onSubmit={handleSubmit} noValidate>
+      <Box className={styles["form-container"]}>
+        <Input
+          label={"First Name"}
+          name={"fname"}
+          id={"fname"}
+          value={fname}
+          onInputChangeHandler={fnameChangeHandler}
+          onBlurHandler={fnameBlurHandler}
+          hasError={fnameHasError}
+        />
+        <Input
+          label={"Last Name"}
+          name={"lname"}
+          id={"lname"}
+          value={lname}
+          onInputChangeHandler={lnameChangeHandler}
+          onBlurHandler={lnameBlurHandler}
+          hasError={lnameHasError}
+        />
+        <Input
+          label={"Email"}
+          name={"email"}
+          id={"email"}
+          type="email"
+          value={email}
+          onInputChangeHandler={emailChangeHandler}
+          onBlurHandler={emailBlurHandler}
+          hasError={emailHasError}
+        />
 
-      <Input
-        label={"Mobile Number"}
-        name={"mobileno"}
-        id={"mobileno"}
-        value={mobileno}
-        onInputChangeHandler={mobilenoChangeHandler}
-        onBlurHandler={mobilenoBlurHandler}
-        hasError={mobilenoHasError}
-      />
-      <Input
-        label={"Role"}
-        name={"role"}
-        id={"role"}
-        value={role}
-        onInputChangeHandler={roleChangeHandler}
-        onBlurHandler={roleBlurHandler}
-        hasError={roleHasError}
-      />
-      <Input
-        label={"User Id"}
-        name={"userId"}
-        id={"userId"}
-        value={userId}
-        onInputChangeHandler={userIdChangeHandler}
-        onBlurHandler={userIdBlurHandler}
-        hasError={userIdHasError}
-      />
+        <Input
+          label={"Mobile Number"}
+          name={"mobileno"}
+          id={"mobileno"}
+          value={mobileno}
+          onInputChangeHandler={mobilenoChangeHandler}
+          onBlurHandler={mobilenoBlurHandler}
+          hasError={mobilenoHasError}
+        />
 
-      <Input
-        label={"Passwod"}
-        type="password"
-        name={"password"}
-        id={"password"}
-        value={password}
-        onInputChangeHandler={passwordChangeHandler}
-        onBlurHandler={passwordBlurHandler}
-        hasError={passwordHasError}
-      />
-      <DropDown
-        label={"Status"}
-        name={"isactive"}
-        id={"isactive"}
-        value={isactive}
-        onInputChangeHandler={isactiveChangeHandler}
-        onBlurHandler={isactiveBlurHandler}
-        hasError={isactiveHasError}
-      />
-      <Button
-        type="submit"
-        fullWidth
-        variant="contained"
-        disabled={isAuthenticating}
-      >
-        Submit
-      </Button>
-      <SnackBar
-        open={open}
-        handleClose={hideSnackBar}
-        type={snackBarProps.type}
-        message={snackBarProps.message}
-      />
+        <DropDown
+          label={"Role *"}
+          name={"role"}
+          id={"role"}
+          value={role}
+          handleChange={roleChangeHandler}
+          onBlurHandler={roleBlurHandler}
+          hasError={roleHasError}
+          style={{ marginTop: ".7em" }}
+        />
+        <Input
+          label={"User Id"}
+          name={"userId"}
+          id={"userId"}
+          value={userId}
+          onInputChangeHandler={userIdChangeHandler}
+          onBlurHandler={userIdBlurHandler}
+          hasError={userIdHasError}
+        />
+
+        <Input
+          label={"Passwod"}
+          type="password"
+          name={"password"}
+          id={"password"}
+          value={password}
+          onInputChangeHandler={passwordChangeHandler}
+          onBlurHandler={passwordBlurHandler}
+          hasError={passwordHasError}
+        />
+
+        <CustomSwitch
+          label={"Status"}
+          leftLabel={"In-Active"}
+          rightLabel={"Active"}
+          value={isactive}
+          handleChange={isactiveChangeHandler}
+        />
+
+        <SnackBar
+          open={open}
+          handleClose={hideSnackBar}
+          type={snackBarProps.type}
+          message={snackBarProps.message}
+        />
+      </Box>
+      <Box sx={{ textAlign: "end" }}>
+        <Button
+          sx={{ width: "20%" }}
+          type="submit"
+          fullWidth
+          variant="contained"
+          disabled={isAuthenticating}
+        >
+          Submit
+        </Button>
+      </Box>
     </Box>
   );
 }
