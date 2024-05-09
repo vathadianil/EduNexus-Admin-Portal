@@ -5,20 +5,10 @@ import {
   GridToolbarExport,
 } from "@mui/x-data-grid";
 import AddIcon from "@mui/icons-material/Add";
-import { useState } from "react";
-import AddUserDialog from "./AddUserDialog";
 
-export default function CustomToolbar() {
-  const [open, setOpen] = useState(false);
-  const handleClickOpen = async () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
+export default function CustomToolbar({ handleClickOpen }) {
   return (
     <GridToolbarContainer>
-      <AddUserDialog open={open} handleClose={handleClose} />
       <GridToolbarExport
         slotProps={{
           tooltip: { title: "Export data" },

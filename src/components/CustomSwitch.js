@@ -2,6 +2,7 @@ import { FormControlLabel, Stack, Switch, Typography } from "@mui/material";
 
 function CustomSwitch({
   label,
+  name,
   value,
   labelPlacement = "top",
   leftLabel,
@@ -12,6 +13,7 @@ function CustomSwitch({
     <Stack direction="row" spacing={1} alignItems="center">
       {leftLabel && <Typography>{leftLabel}</Typography>}
       <FormControlLabel
+        name={name}
         checked={value}
         control={<Switch color="primary" />}
         label={label}

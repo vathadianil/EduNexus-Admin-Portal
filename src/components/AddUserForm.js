@@ -1,21 +1,30 @@
 import { Box, Button } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Input from "./Input";
-import SnackBar from "./SnackBar";
-import useSnackBar from "../utils/hooks/useSnackBar";
 import useInput from "../utils/hooks/useInput";
 import styles from "../css/add-user-form.module.css";
 import DropDown from "./DropDown";
 import CustomSwitch from "./CustomSwitch";
+import axios from "../utils/axios/axios";
+import { CREATE_USER, GET_ROLE_LIST } from "../utils/api/api-request";
 
 function validateText(text) {
   const isValid = !!String(text)?.trim();
   return isValid;
 }
 
-function AddUserForm() {
+function AddUserForm({ handleClose, showSnackBar }) {
   const [isAuthenticating, setIsAuthenticating] = useState(false);
-  const { open, showSnackBar, hideSnackBar, snackBarProps } = useSnackBar();
+  const [roleList, setRoleList] = useState([]);
+
+  const getRoleList = async () => {
+    const { data } = await axios.get(GET_ROLE_LIST);
+    setRoleList(data?.response);
+  };
+
+  useEffect(() => {
+    getRoleList();
+  }, []);
 
   const {
     value: fname,
@@ -118,23 +127,38 @@ function AddUserForm() {
       inValidFormSubmitHandler();
       return;
     }
+    const loginData = JSON.parse(localStorage.getItem("loginData"));
     const data = new FormData(event.currentTarget);
-    console.log({
-      userId: data.get("userId"),
+
+    const formValues = {
+      aID: 0,
+      email: data.get("email"),
+      mobileno: data.get("mobileno"),
+      fname: data.get("fname"),
+      lname: data.get("lname"),
+      isactive: data.get("isactive") === "on" ? 1 : 0,
+      role: data.get("role"),
+      userid: data.get("userId"),
       password: data.get("password"),
-    });
+      collegeName: loginData?.collegeName,
+      collegeID: loginData?.collegeId,
+    };
     setIsAuthenticating(true);
+
     try {
-      //   const loginData = await login(data.get("userId"), data.get("password"));
-      //   console.log(loginData);
-      //   if (loginData?.token) {
-      //     localStorage.setItem("loginData", JSON.stringify(loginData));
-      //   }
+      const { data } = await axios.post(CREATE_USER, formValues);
+      if (data.returnCode === 1 && data.returnMessage === "Success") {
+        handleClose();
+        showSnackBar({
+          type: "success",
+          message: "User Added Successfully",
+        });
+      }
     } catch (error) {
       console.log(error);
       showSnackBar({
         type: "error",
-        message: "Unable to Login. Check your credential or Try again Later",
+        message: "Unable to Submit. Check your credential or Try again Later",
       });
     }
     setIsAuthenticating(false);
@@ -189,6 +213,7 @@ function AddUserForm() {
           handleChange={roleChangeHandler}
           onBlurHandler={roleBlurHandler}
           hasError={roleHasError}
+          data={roleList || []}
           style={{ marginTop: ".7em" }}
         />
         <Input
@@ -214,17 +239,11 @@ function AddUserForm() {
 
         <CustomSwitch
           label={"Status"}
+          name={"isactive"}
           leftLabel={"In-Active"}
           rightLabel={"Active"}
           value={isactive}
           handleChange={isactiveChangeHandler}
-        />
-
-        <SnackBar
-          open={open}
-          handleClose={hideSnackBar}
-          type={snackBarProps.type}
-          message={snackBarProps.message}
         />
       </Box>
       <Box sx={{ textAlign: "end" }}>

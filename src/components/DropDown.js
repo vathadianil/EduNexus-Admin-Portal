@@ -32,9 +32,11 @@ export default function DropDown({
         onChange={(e) => handleChange(e.target.value)}
         onBlur={onBlurHandler}
       >
-        <MenuItem value={10}>Ten</MenuItem>
-        <MenuItem value={20}>Twenty</MenuItem>
-        <MenuItem value={30}>Thirty</MenuItem>
+        {data?.map((item) => (
+          <MenuItem key={item.id} value={item.value}>
+            {item.value}
+          </MenuItem>
+        ))}
       </Select>
       {hasError && <FormHelperText>Selection is Required</FormHelperText>}
     </FormControl>
