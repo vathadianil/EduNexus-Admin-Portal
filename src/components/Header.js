@@ -1,8 +1,18 @@
-import { Avatar, IconButton, Toolbar, Typography, styled } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  IconButton,
+  Toolbar,
+  Tooltip,
+  Typography,
+  styled,
+} from "@mui/material";
 import MuiAppBar from "@mui/material/AppBar";
 import MenuIcon from "@mui/icons-material/Menu";
 import Logo from "../assets/images/icon.png";
 import styles from "../css/header.module.css";
+import { Logout } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 
 const drawerWidth = 260;
 
@@ -27,6 +37,10 @@ const AppBar = styled(MuiAppBar, {
 }));
 
 function Header({ toggleDrawer, open }) {
+  const navigate = useNavigate();
+  const onLogoutClick = () => {
+    navigate("/");
+  };
   return (
     <AppBar position="fixed" open={open}>
       <Toolbar>
@@ -45,6 +59,12 @@ function Header({ toggleDrawer, open }) {
         <Typography variant="h6" noWrap component="div">
           EduNexus
         </Typography>
+        <Box sx={{ flex: 1 }} />
+        <Tooltip title="Logout">
+          <IconButton color="error" aria-label="Logout" onClick={onLogoutClick}>
+            <Logout />
+          </IconButton>
+        </Tooltip>
       </Toolbar>
     </AppBar>
   );

@@ -1,6 +1,7 @@
 import { Box, Card } from "@mui/material";
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import { DataGrid } from "@mui/x-data-grid";
 import styles from "../css/table.module.css";
+import CustomToolbar from "./CustomToolbar";
 
 function CustomTable({ rows, columns, setRowId, loading }) {
   return (
@@ -22,7 +23,7 @@ function CustomTable({ rows, columns, setRowId, loading }) {
           loading={loading}
           pageSizeOptions={[5, 10]}
           disableRowSelectionOnClick
-          slots={{ toolbar: GridToolbar }}
+          slots={{ toolbar: CustomToolbar }}
           slotProps={{
             toolbar: {
               showQuickFilter: true,
