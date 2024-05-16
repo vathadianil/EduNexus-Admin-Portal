@@ -1,12 +1,14 @@
-import { useEffect, useMemo, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import CustomBreadCrumbs from "../components/CustomBreadCrumbs";
 import CustomTable from "../components/CustomTable";
 import UserActions from "../components/UserActions";
 import axios from "../utils/axios/axios";
 import { GET_USER } from "../utils/api/api-request";
 import DisplayQr from "../components/DisplayQr";
+import { AppContext } from "../store/app-context";
 
 export default function Users() {
+  const { userAdded } = useContext(AppContext);
   const [rowId, setRowId] = useState(null);
   const [userList, setUserList] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -106,7 +108,7 @@ export default function Users() {
 
   useEffect(() => {
     getUsers();
-  }, []);
+  }, [userAdded]);
 
   return (
     <>

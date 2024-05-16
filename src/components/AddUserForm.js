@@ -1,5 +1,5 @@
 import { Box, Button } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Input from "./Input";
 import useInput from "../utils/hooks/useInput";
 import styles from "../css/add-user-form.module.css";
@@ -7,6 +7,7 @@ import DropDown from "./DropDown";
 import CustomSwitch from "./CustomSwitch";
 import axios from "../utils/axios/axios";
 import { CREATE_USER, GET_ROLE_LIST } from "../utils/api/api-request";
+import { AppContext } from "../store/app-context";
 
 function validateText(text) {
   const isValid = !!String(text)?.trim();
@@ -14,6 +15,7 @@ function validateText(text) {
 }
 
 function AddUserForm({ handleClose, showSnackBar }) {
+  const { onUserAdd } = useContext(AppContext);
   const [isAuthenticating, setIsAuthenticating] = useState(false);
   const [roleList, setRoleList] = useState([]);
 
@@ -153,6 +155,7 @@ function AddUserForm({ handleClose, showSnackBar }) {
           type: "success",
           message: "User Added Successfully",
         });
+        onUserAdd(new Date().getTime());
       }
     } catch (error) {
       console.log(error);
