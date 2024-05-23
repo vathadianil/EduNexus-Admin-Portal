@@ -1,6 +1,8 @@
 import axios from "axios";
 
-export const baseURL = "http://13.232.201.89:8001";
+// export const baseURL = "http://13.232.201.89:8001";
+
+export const baseURL = "https://next-itpros.in";
 
 export default axios.create({
   baseURL: baseURL,

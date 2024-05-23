@@ -62,14 +62,11 @@ function LoginForm() {
       return;
     }
     const data = new FormData(event.currentTarget);
-    console.log({
-      userId: data.get("userId"),
-      password: data.get("password"),
-    });
+
     setIsAuthenticating(true);
     try {
       const loginData = await login(data.get("userId"), data.get("password"));
-      console.log(loginData);
+
       if (loginData?.token) {
         navigate("/home");
         localStorage.setItem("loginData", JSON.stringify(loginData));
