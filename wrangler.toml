@@ -1,0 +1,5 @@
+name = "EduNexus"
+type = "webpack"
+account_id = "b19f80268a73403f85fffd910ecfd4bb"
+workers_dev = true
+build_command = "npm install && npm run build"
